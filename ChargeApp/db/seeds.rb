@@ -5,3 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+customer_one   = Customer.create!(first_name: "Johny", last_name: "Flow")
+customer_two   = Customer.create!(first_name: "Raj", last_name: "Jamnis")
+customer_three = Customer.create!(first_name: "Andrew", last_name: "Chung")
+customer_four  = Customer.create!(first_name: "Mike", last_name: "Smith")
+
+# successful transactions
+5.times { Charge.create!(customer_id: customer_one.id, paid: true, currency: "usd") }
+3.times { Charge.create!(customer_id: customer_two.id, paid: true, currency: "usd") }
+Charge.create!(customer_id: customer_three.id, paid: true, currency: "usd") 
+Charge.create!(customer_id: customer_four.id, paid: true, currency: "usd") 
+
+# failed transactions
+3.times { Charge.create!(customer_id: customer_three.id, paid: false, currency: "usd") }
+2.times { Charge.create!(customer_id: customer_four.id, paid: false, currency: "usd") }
+
+# disputed
+3.times { Charge.create!(customer_id: customer_one.id, disputed: true, currency: "usd") }
+2.times { Charge.create!(customer_id: customer_two.id, disputed: true, currency: "usd") }

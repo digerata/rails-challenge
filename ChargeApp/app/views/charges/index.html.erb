@@ -1,35 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Charges</h1>
+<h1>Failed Charges</h1>
 
-<table>
+<table class="failed_charges">
   <thead>
     <tr>
-      <th>Paid</th>
-      <th>Amount</th>
-      <th>Currency</th>
-      <th>Refunded</th>
       <th>Customer</th>
-      <th>Disputed</th>
+      <th>Amount</th>
+      <th>Created</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @charges.each do |charge| %>
+    <% @failed_charges.each do |charge| %>
       <tr>
-        <td><%= charge.paid %></td>
+        <td><%= charge.customer.name %></td>
         <td><%= charge.amount %></td>
-        <td><%= charge.currency %></td>
-        <td><%= charge.refunded %></td>
-        <td><%= charge.customer_id %></td>
-        <td><%= charge.disputed %></td>
+        <td><%= charge.created %></td>
         <td><%= link_to 'Show', charge %></td>
         <td><%= link_to 'Edit', edit_charge_path(charge) %></td>
         <td><%= link_to 'Destroy', charge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-  </tbody>
+      <% end %>
+    </tbody>
 </table>
 
 <br>
