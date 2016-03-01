@@ -12,15 +12,15 @@ customer_three = Customer.create!(first_name: "Andrew", last_name: "Chung")
 customer_four  = Customer.create!(first_name: "Mike", last_name: "Smith")
 
 # successful transactions
-5.times { Charge.create!(customer_id: customer_one.id, paid: true, currency: "usd") }
-3.times { Charge.create!(customer_id: customer_two.id, paid: true, currency: "usd") }
-Charge.create!(customer_id: customer_three.id, paid: true, currency: "usd") 
-Charge.create!(customer_id: customer_four.id, paid: true, currency: "usd") 
+5.times { Charge.create!(customer_id: customer_one.id, paid: true, currency: "usd", amount: rand(1000)) }
+3.times { Charge.create!(customer_id: customer_two.id, paid: true, currency: "usd", amount: rand(1000)) }
+Charge.create!(customer_id: customer_three.id, paid: true, currency: "usd", amount: rand(1000)) 
+Charge.create!(customer_id: customer_four.id, paid: true, currency: "usd", amount: rand(1000)) 
 
 # failed transactions
-3.times { Charge.create!(customer_id: customer_three.id, paid: false, currency: "usd") }
-2.times { Charge.create!(customer_id: customer_four.id, paid: false, currency: "usd") }
+3.times { Charge.create!(customer_id: customer_three.id, paid: false, currency: "usd", amount: rand(1000)) }
+2.times { Charge.create!(customer_id: customer_four.id, paid: false, currency: "usd", amount: rand(1000)) }
 
 # disputed
-3.times { Charge.create!(customer_id: customer_one.id, disputed: true, currency: "usd") }
-2.times { Charge.create!(customer_id: customer_two.id, disputed: true, currency: "usd") }
+3.times { Charge.create!(customer_id: customer_one.id, disputed: true, currency: "usd", amount: rand(1000)) }
+2.times { Charge.create!(customer_id: customer_two.id, disputed: true, currency: "usd", amount: rand(1000)) }
