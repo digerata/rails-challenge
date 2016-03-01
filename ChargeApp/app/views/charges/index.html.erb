@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= render "partials/list", status: :failed, charges: @failed_charges %>
+
+<%= render "partials/list", status: :disputed, charges: @disputed_charges %>
+
+<%= render "partials/list", status: :successful, charges: @successful_charges %>
+
+<br>
+
+<%= link_to 'New Charge', new_charge_path %>
