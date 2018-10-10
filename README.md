@@ -14,7 +14,7 @@
 
 - Fork this repository.
 - Create a *source* directory.
-- In the *source* directory, scaffold a simple Rails 4 web app that models a credit card charge. JSON data structure below:
+- In the *source* directory, scaffold a simple Rails 5 web app that models a credit card charge. JSON data structure below:
 
 ```
   {
