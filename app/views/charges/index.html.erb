@@ -18,7 +18,7 @@
     <% @charges.each do |charge| %>
       <tr>
         <td><%= charge.paid %></td>
-        <td><%= charge.amount %></td>
+        <td><%= number_to_currency(charge.amount) %></td>
         <td><%= charge.currency %></td>
         <td><%= charge.refunded %></td>
         <td><%= charge.disputed %></td>
@@ -30,6 +30,76 @@
   </tbody>
 </table>
 
-<br>
+<br><br>
 
 <%= link_to 'New Charge', new_charge_path %>
+
+<br><br>
+
+<h1 id="failed_heading">Failed Charges</h1>
+
+<table id="failed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody id="failing">
+      <% failed = Customer.joins(:charges).where(charges: { paid:false }) %>
+      <% failed.each do |f| %>
+      <tr>
+          <td><%= f.last_name %>, <%= f.first_name %></td>
+          <td><%=  %></td>
+          <td><%= f.created_at %></td>
+      <% end %>
+      </tr>
+  </tbody>
+</table>
+
+<h1 id="disputed_heading">Disputed Charges</h1>
+
+<table id="disputed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% disputes = Customer.joins(:charges).where(charges: { disputed:true }) %>
+      <% disputes.each do |s| %>
+      <tr>
+          <td><%= s.last_name %>, <%= s.first_name %></td>
+          <td><%= %></td>
+          <td><%= s.created_at %></td> 
+      <% end %>
+      </tr>
+  </tbody>
+</table>
+
+<h1 id="successful_heading">Successful Charges</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Currency</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @charges.each do |paid| %>
+      <tr>
+        <% if paid.paid == true %>
+          <td><%= number_to_currency(paid.amount) %></td>
+          <td><%= paid.currency %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
